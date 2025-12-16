@@ -59,8 +59,51 @@ const getsingleVehicles = async (req: Request, res: Response) => {
     });
   }
 };
+
+const updatevehiclefromController = async (req: Request, res: Response) => {
+  try {
+    const vehicleId = req.params.vehicleId;
+    const result = await vehicleService.updatevehicleByid(
+      vehicleId as string,
+      req.body
+    );
+    return res.status(200).json({
+      success: true,
+      message: "Vehicle updated successfully",
+      data: result,
+    });
+  } catch (error: any) {
+    return res.status(500).json({
+      success: false,
+      message: error.message || "Something went wrong",
+      error: error,
+    });
+  }
+};
+const deletevehiclefromController = async (req: Request, res: Response) => {
+  try {
+    const vehicleId = req.params.vehicleId;
+    const result = await vehicleService.deletevehiclesByID({
+      vehicleId: vehicleId as string,
+    });
+    return res.status(200).json({
+      success: true,
+      message: "Vehicle deleted successfully",
+      data: result,
+    });
+  } catch (error: any) {
+    return res.status(500).json({
+      success: false,
+      message: error.message || "Something went wrong",
+      error: error,
+    });
+  }
+};
+
 export const vehicleController = {
   createvehicleINDB,
   getAllvehiclesFromDB,
   getsingleVehicles,
+  updatevehiclefromController,
+  deletevehiclefromController,
 };

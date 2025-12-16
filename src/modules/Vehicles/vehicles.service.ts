@@ -35,9 +35,55 @@ const getsingleVehicles = async ({ vehicleId }: { vehicleId: string }) => {
 
   return result.rows[0];
 };
+const updatevehicleByid = async (
+  vehicleId: string,
+  payload: Record<string, unknown>
+) => {
+  const {
+    vehicle_name,
+    type,
+    registration_number,
+    daily_rent_price,
+    availability_status,
+  } = payload;
+
+  console.log(
+    vehicle_name,
+    type,
+    registration_number,
+    daily_rent_price,
+    availability_status
+  );
+  const result = await pool.query(
+    `UPDATE Vehicles SET vehicle_name=$1, type=$2,
+    registration_number=$3,
+    daily_rent_price=$4,
+    availability_status=$5 WHERE id=$6 RETURNING * `,
+    [
+      vehicle_name,
+      type,
+      registration_number,
+      daily_rent_price,
+      availability_status,
+      vehicleId,
+    ]
+  );
+
+  return result.rows[0];
+};
+
+const deletevehiclesByID = async ({ vehicleId }: { vehicleId: string }) => {
+  const result = await pool.query(`DELETE FROM Vehicles WHERE id=$1`, [
+    vehicleId,
+  ]);
+
+  return result.rows[0];
+};
 
 export const vehicleService = {
   createvehicleINDB,
   getAllVehicls,
   getsingleVehicles,
+  updatevehicleByid,
+  deletevehiclesByID,
 };
