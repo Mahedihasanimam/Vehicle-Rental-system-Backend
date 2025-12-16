@@ -1,10 +1,13 @@
 import express from "express";
+import config from "./config/config";
+import { initDB } from "./database/db";
 
 const app = express();
-const port = 4000;
 
 app.use(express.json());
 
-app.listen(port, () => {
-  console.log(`server is running on port ${port}`);
+initDB();
+
+app.listen(config.port, () => {
+  console.log(`server is running on port ${config.port}`);
 });
