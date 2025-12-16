@@ -8,7 +8,7 @@ export const initDB = async () => {
   await pool.query(`CREATE TABLE IF NOT EXISTS Users(
     id SERIAL PRIMARY KEY,
     name VARCHAR(200) NOT NULL,
-    email VARCHAR(150) NOT NULL UNIQUE CHECK (email = LOWER(email)),
+    email VARCHAR(250) NOT NULL UNIQUE CHECK (email = LOWER(email)),
     password VARCHAR(250) NOT NULL CHECK(LENGTH(password)>=6),
     phone VARCHAR(20) NOT NULL,
     role VARCHAR(20) NOT NULL CHECK(role IN ('admin','customer'))
@@ -16,7 +16,7 @@ export const initDB = async () => {
 
   await pool.query(`CREATE TABLE IF NOT EXISTS Vehicles(
         id SERIAL PRIMARY KEY,
-        vehicle_name VARCHAR(200) NOT NULL,
+        vehicle_name VARCHAR(250) NOT NULL,
         type VARCHAR(200) NOT NULL CHECK(type IN ('car','bike','van','SUV')),
         registration_number VARCHAR(200) NOT NULL UNIQUE,
         daily_rent_price NUMERIC(10,2) NOT NULL CHECK(daily_rent_price > 0),
