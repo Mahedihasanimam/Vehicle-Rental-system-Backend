@@ -1,92 +1,85 @@
 # 🚗 Vehicle Rental System
 
-A backend API for managing vehicles, customers, and bookings with **role-based authentication**.
+**Live Demo:** https://vehicle-rental-system-backend-three.vercel.app (#)
+
+A backend API for managing vehicles, customers, and bookings with secure **role-based access** (Admin & Customer).
 
 ---
 
-## 🎯 Overview
+## 🎯 Features
 
-- **Vehicles** – Add, update, track availability
-- **Customers** – Register and manage profiles
-- **Bookings** – Create, cancel, return bookings with total cost calculation
-- **Authentication** – Admin and Customer roles with JWT-based access
+- **Vehicles:** Add, update, delete, and track availability
+- **Customers:** Register, view, and manage profiles
+- **Bookings:** Create, cancel, return bookings with automatic price calculation
+- **Authentication:** JWT-based role access control
+- **Admin vs Customer:** Admin manages all; customers manage their own bookings
 
 ---
 
-## 🛠️ Technology
+## 🛠️ Technology Stack
 
 - **Node.js + TypeScript**
-- **Express.js**
-- **PostgreSQL (Neon DB)**
+- **Express.js** – Web framework
+- **PostgreSQL (Neon DB)** – Hosted database
 - **bcrypt** – Password hashing
 - **jsonwebtoken (JWT)** – Authentication
 
 ---
 
-## 📁 Structure
+## ⚙️ Setup & Usage
 
-src/
-├─ controllers/ # Request handlers
-├─ routes/ # API endpoints
-├─ services/ # Business logic
-├─ models/ # DB models
-├─ middlewares/ # Auth & validation
-├─ utils/ # Helpers
-└─ app.ts # Server setup
+### 1. Prerequisites
 
-yaml
-Copy code
+- Install **Node.js** ([nodejs.org](https://nodejs.org))
+- Install **Postman** for testing APIs ([postman.com](https://www.postman.com/downloads/))
 
----
+### 2. Environment Variables
 
-## 🔐 Roles & Auth
-
-- **Admin** – Full access (vehicles, users, bookings)
-- **Customer** – Manage own bookings
-- Passwords hashed with bcrypt
-- JWT token required for protected routes
-
----
-
-## 🌐 API Endpoints
-
-| Feature  | Endpoint                   | Access       |
-| -------- | -------------------------- | ------------ |
-| Auth     | /api/v1/auth/signup/signin | Public       |
-| Vehicles | /api/v1/vehicles/:id       | Admin/Public |
-| Users    | /api/v1/users/:id          | Admin/Own    |
-| Bookings | /api/v1/bookings/:id       | Role-based   |
-
----
-
-## ⚙️ Setup (Non-Tech Friendly)
-
-1. Install **Node.js** ([nodejs.org](https://nodejs.org))
-2. Download project and open folder
-3. Create `.env` file:
+Create a `.env` file in the project root:
 
 ```env
 NODE_DB_STRING=postgresql://neondb_owner:password@host/neondb?sslmode=require
 NODE_PORT=4000
 JWT_SECRET=your_secret
-Install dependencies:
-
+3. Install Dependencies
 bash
 Copy code
 npm install
-Start server:
-
+4. Run the Server
 bash
 Copy code
 npm run dev
-Test APIs using Postman (login, add vehicles, create bookings)
-
 Server runs at: http://localhost:4000
 
-✅ Notes
-Admin manages vehicles & users
+5. Test API
+Use Postman to access endpoints like /api/v1/auth/signup, /api/v1/vehicles, /api/v1/bookings, etc.
 
-Customers manage own bookings
+Include JWT token in Authorization header for protected routes:
 
-Keep .env values unchanged for Neon DB connection
+makefile
+Copy code
+Authorization: Bearer <token>
+📁 Project Structure
+bash
+Copy code
+src/
+├─ controllers/  # Request handlers
+├─ routes/       # API endpoints
+├─ services/     # Business logic
+├─ models/       # DB models
+├─ middlewares/  # Auth & validation
+├─ utils/        # Helper functions
+└─ app.ts        # Express server setup
+📌 Submission
+GitHub Repo: Your GitHub Repo Link
+
+Live Deployment: Your Live Deployment Link
+
+Notes:
+
+Admin accounts manage vehicles & users.
+
+Customer accounts manage only their own bookings.
+
+Keep .env values unchanged for proper DB connection.
 ```
