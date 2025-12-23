@@ -22,6 +22,15 @@ const getalluserFromController = async (req: Request, res: Response) => {
 const updateAuserController = async (req: Request, res: Response) => {
   try {
     const userId = req.params.userId;
+    const loggedInUser = req.user;
+
+    if (loggedInUser?.role !== "admin" && loggedInUser?.id !== Number(userId)) {
+      return res.status(403).json({
+        success: false,
+        message: "You are not allowed to update this user",
+      });
+    }
+
     const result = await userService.updateuserById(userId as string, req.body);
     return res.status(200).json({
       success: true,

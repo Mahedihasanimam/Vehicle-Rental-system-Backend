@@ -3,7 +3,6 @@ import { pool } from "../../database/db";
 import jwt from "jsonwebtoken";
 const RegisterDB = async (paylod: Record<string, unknown>) => {
   const { name, email, password, phone, role } = paylod;
-  console.log(name, email, password, phone, role);
   const hashedpassword = await bcrypt.hash(password as string, 10);
 
   const result = await pool.query(

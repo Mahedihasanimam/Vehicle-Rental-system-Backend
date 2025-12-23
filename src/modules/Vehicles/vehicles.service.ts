@@ -33,7 +33,7 @@ const getsingleVehicles = async ({ vehicleId }: { vehicleId: string }) => {
     vehicleId,
   ]);
 
-  return result.rows[0];
+  return result.rows.length > 0 ? result.rows[0] : [];
 };
 const updatevehicleByid = async (
   vehicleId: string,
@@ -47,13 +47,6 @@ const updatevehicleByid = async (
     availability_status,
   } = payload;
 
-  console.log(
-    vehicle_name,
-    type,
-    registration_number,
-    daily_rent_price,
-    availability_status
-  );
   const result = await pool.query(
     `UPDATE Vehicles SET vehicle_name=$1, type=$2,
     registration_number=$3,

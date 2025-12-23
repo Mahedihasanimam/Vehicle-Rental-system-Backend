@@ -44,12 +44,17 @@ const getsingleVehicles = async (req: Request, res: Response) => {
       vehicleId: req.params.vehicleId as string,
     });
 
+    if (!result) {
+      return res.status(404).json({
+        success: true,
+        message: "Vehicle not found",
+        data: result,
+      });
+    }
+
     return res.status(200).json({
       success: true,
-      message:
-        result.length > 0
-          ? "Vehicles retrieved successfully"
-          : "No vehicles found",
+      message: "Vehicle retrieved successfully",
       data: result,
     });
   } catch (error: any) {

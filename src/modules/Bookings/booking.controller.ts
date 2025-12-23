@@ -1,3 +1,4 @@
+import jwt from "jsonwebtoken";
 import { Request, Response } from "express";
 import { bookingService } from "./booking.service";
 
@@ -19,9 +20,17 @@ const createbookingINDB = async (req: Request, res: Response) => {
 };
 
 const getAllbookingsFromDB = async (req: Request, res: Response) => {
-  try {
-    const result = await bookingService.getallBookings();
+  const decodedData = jwt.verify(
+    req.headers.authorization?.split(" ")[1] as string,
+    process.env.JWT_SECRET as string
+  ) as jwt.JwtPayload;
 
+  const decodedRole = decodedData.role;
+  try {
+    const result = await bookingService.getallBookings(
+      decodedRole,
+      decodedData.id
+    );
     return res.status(200).json({
       success: true,
       message:

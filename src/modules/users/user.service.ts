@@ -12,7 +12,6 @@ const updateuserById = async (
 ) => {
   const { id, name, email, phone, role } = payload;
 
-  console.log(id, name, email, phone, role);
   const result = await pool.query(
     `UPDATE Users SET name=$1, email=$2,
     phone=$3,
