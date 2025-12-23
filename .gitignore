@@ -4,3 +4,6 @@ node_modules
 # environtment varibles
 .env 
 .env.local
+.vercel
+
+dist
